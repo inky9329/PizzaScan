@@ -12,16 +12,12 @@ def readFile(filename):
     print(len(url_lst))
         # print(urls)
 
-
-
-
 def findWord(url, word):
     page = requests.get(url).text
     findword  = re.findall(word, page)
     num = page.find(word)
     print(findword)
     print(num)
-
 
 def count_words(url, the_word):
     try:
@@ -50,5 +46,3 @@ if __name__ == '__main__':
         for url in new_lst:
             file.write(url+'\n')
         file.close()
-
-
