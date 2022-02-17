@@ -1,8 +1,6 @@
 <h2>PizzaScan!</h2>
 
 Team Pizzabyte proudly presents the new PizzaScan tool! This tool automates finding bugs (Specificly XSS) with minimal amount of requests.
-USAGE
-
 
 Installation:
 
