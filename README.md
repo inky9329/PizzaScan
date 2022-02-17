@@ -3,6 +3,15 @@
 Team Pizzabyte proudly presents the new PizzaScan tool! This tool automates finding bugs (Specificly XSS) with minimal amount of requests.
 USAGE
 
+
+Installation:
+
+```
+git clone https://github.com/frostb1ten/PizzaScan
+cd PizzaScan
+chmod +x PizzaScan.sh
+```
+
 <b>For a single domain</b>
 
 ```
