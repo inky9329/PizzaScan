@@ -13,6 +13,8 @@ fi
 
 if [ ! -d  "./bin/SubEnum" ]; then
 	git clone https://github.com/bing0o/SubEnum.git ./bin/SubEnum
+	chmod +x ./bin/SubEnum/setup.sh
+	./bin/SubEnum/setup.sh
 fi
 
 if [ $2 = "-list" ]; then
