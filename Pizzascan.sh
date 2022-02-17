@@ -1,7 +1,18 @@
 #!/bin/bash
 
-rm ./host.txt
-rm ./output/*
+# Color variables
+green='\033[0;32m'
+red='\033[0;31m'
+# Clear the color after that
+clear='\033[0m'
+
+if [ -f  "./host.txt" ]; then
+	rm ./host.txt
+fi
+
+if [ -d  "./output" ]; then
+        rm ./output/*
+fi
 
 if [ ! -d  "./bin" ]; then
 	mkdir ./bin
@@ -13,9 +24,6 @@ fi
 
 if [ ! -d  "./bin/SubEnum" ]; then
 	git clone https://github.com/bing0o/SubEnum.git ./bin/SubEnum
-	chmod +x ./bin/SubEnum/setup.sh
-	./bin/SubEnum/setup.sh
-	clear
 fi
 
 if [ $2 = "-list" ]; then
@@ -43,9 +51,9 @@ do
     httpcode=$(curl --insecure -o /dev/null --silent --head --write-out '%{http_code}' "$url" )
     if [ "$httpcode" == "200" ]; then
          echo "$url" >> ./host.txt
-	 echo "$url" "is good"
+	 echo -e "${green}POTENTIAL XSS FOUND  $url${clear}"
     else
-	 echo "$url" "is bad"
+	 echo -e "${red}No XSS found at      $url${clear}"
     fi
 done < ./pspider_out.txt
 sed -i 's/Bugbounty/pizzascan">bugbounty/g' host.txt
