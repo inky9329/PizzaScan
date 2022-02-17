@@ -25,4 +25,4 @@ chmod +x PizzaScan.sh
 ```
 
 
-<h3>This tool is for VDP/Bugbounty useage only. We are not liable for and damages or trouble caused by this scanner.</h3>
+<h3>***This tool is for VDP/Bugbounty useage only. We are not liable for and damages or trouble caused by this scanner.***</h3>
