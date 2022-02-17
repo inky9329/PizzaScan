@@ -1,12 +1,7 @@
 #!/bin/bash
 
-if [ -f  "./host.txt" ]; then
-	rm ./host.txt
-fi
-
-if [ -d  "./output" ]; then
-        rm ./output/*
-fi
+rm ./host.txt
+rm ./output/*
 
 if [ ! -d  "./bin" ]; then
 	mkdir ./bin
