@@ -1,48 +1,60 @@
-import requests
-import re
+#!/bin/bash
 
-url_lst = []
+# Color variables
+green='\033[0;32m'
+red='\033[0;31m'
+# Clear the color after that
+clear='\033[0m'
 
-def readFile(filename):
-    with open(filename, 'r') as file:
-        urls = file.readlines()
-        for x in urls:
-            url_lst.append(x[:-1])
-        file.close()
-    print(len(url_lst))
-        # print(urls)
+rm ./host.txt
+rm ./output/*
 
-def findWord(url, word):
-    page = requests.get(url).text
-    findword  = re.findall(word, page)
-    num = page.find(word)
-    print(findword)
-    print(num)
+if [ ! -d  "./bin" ]; then
+	mkdir ./bin
+fi
 
-def count_words(url, the_word):
-    try:
-        r = requests.get(url).text
-        output = r.count(the_word)
-        print(f"{url}: {output}")
-        return output
-    except Exception as e:
-        return e
+if [ ! -d  "./bin/ParamSpider" ]; then
+        git clone https://github.com/devanshbatham/ParamSpider.git ./bin/ParamSpider
+fi
 
-if __name__ == '__main__':
-    readFile("host.txt")
-    new_lst = []
-    for url in url_lst:
-        get_response = count_words(url, 'pizzascan">bugbounty')
-        try:
-            if int(get_response) > 1:
-                new_lst.append(url)
-                # print(f"{url}: {get_response}")
-        except Exception as e:
-            print(e)
+if [ ! -d  "./bin/SubEnum" ]; then
+	git clone https://github.com/bing0o/SubEnum.git ./bin/SubEnum
+	chmod +x ./bin/SubEnum/setup.sh
+	./bin/SubEnum/setup.sh
+	clear
+fi
 
-    print(f"New Urls are: {new_lst}")
+if [ $2 = "-list" ]; then
+	./bin/SubEnum/subenum.sh -d "$1" -o ./domains.txt
+elif [ $2 = "-single" ]; then
+	echo "$1" > ./domains.txt
+fi
 
-    with open("output.txt", 'a') as file:
-        for url in new_lst:
-            file.write(url+'\n')
-        file.close()
+clear
+
+while read attk
+do
+	python3 ./bin/ParamSpider/paramspider.py -d "$attk" -p Bugbounty --exclude js,jpg,png,css,woff,ttf,svg,ashx,gif,svg
+done < ./domains.txt
+
+cat ./output/* > ./pspider_out.txt
+sed -i '/?utm_source/d' ./pspider_out.txt
+sed -i '/?utm_medium/d' ./pspider_out.txt
+sed -i '/?C=/d' ./pspider_out.txt
+
+clear
+
+while read url
+do
+    httpcode=$(curl --insecure -o /dev/null --silent --head --write-out '%{http_code}' "$url" )
+    if [ "$httpcode" == "200" ]; then
+         echo "$url" >> ./host.txt
+	 echo -e "${green}POTENTIAL XSS FOUND  $url${clear}"
+    else
+	 echo -e "${red}No XSS found at      $url${clear}"
+    fi
+done < ./pspider_out.txt
+sed -i 's/Bugbounty/pizzascan">bugbounty/g' host.txt
+sleep 5
+clear
+python3 -u Find_HTML_inj.py | tee debug.txt && sed -i '/:\s0/d' debug.txt 
