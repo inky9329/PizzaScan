@@ -24,5 +24,6 @@ chmod +x PizzaScan.sh
 ./Pizzascan.sh website.com -list
 ```
 
+All vulnerable sites will display in output.txt
 
 <h3>***This tool is for VDP/Bugbounty useage only. We are not liable for any damages or trouble caused by this scanner.***</h3>
