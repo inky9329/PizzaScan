@@ -51,9 +51,9 @@ do
     httpcode=$(curl --insecure -o /dev/null --silent --head --write-out '%{http_code}' "$url" )
     if [ "$httpcode" == "200" ]; then
          echo "$url" >> ./host.txt
-	 echo -e "${green}POTENTIAL XSS FOUND  $url${clear}"
+	 echo -e "${green}VALID URL FOUND:  $url${clear}"
     else
-	 echo -e "${red}No XSS found at      $url${clear}"
+	 echo -e "${red}INVALID URL:      $url${clear}"
     fi
 done < ./pspider_out.txt
 sed -i 's/Bugbounty/pizzascan">bugbounty/g' host.txt
