@@ -25,3 +25,11 @@ chmod +x PizzaScan.sh
 All vulnerable sites will display in output.txt
 
 <h3>***This tool is for VDP/Bugbounty useage only. We are not liable for any damages or trouble caused by this scanner.***</h3>
+
+
+
+Credits to 
+https://github.com/devanshbatham/ParamSpider
+and 
+https://github.com/bing0o/SubEnum
+for such amazing tools.
