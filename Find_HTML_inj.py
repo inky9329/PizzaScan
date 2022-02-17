@@ -32,7 +32,7 @@ if __name__ == '__main__':
     readFile("host.txt")
     new_lst = []
     for url in url_lst:
-        get_response = count_words(url, 'frostb1te">bugbounty')
+        get_response = count_words(url, 'pizzascan">bugbounty')
         try:
             if int(get_response) > 1:
                 new_lst.append(url)
