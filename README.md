@@ -7,7 +7,7 @@ Installation:
 ```
 git clone https://github.com/frostb1ten/PizzaScan
 cd PizzaScan
-chmod +x PizzaScan.sh
+chmod +x Pizzascan.sh
 ```
 
 <b>For a single domain</b>
