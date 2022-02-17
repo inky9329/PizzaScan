@@ -50,7 +50,7 @@ do
 	 echo "$url" "is bad"
     fi
 done < ./pspider_out.txt
-sed -i 's/Bugbounty/frostb1te">bugbounty/g' host.txt
+sed -i 's/Bugbounty/pizzascan">bugbounty/g' host.txt
 sleep 5
 clear
 python3 -u Find_HTML_inj.py | tee debug.txt && sed -i '/:\s0/d' debug.txt 
