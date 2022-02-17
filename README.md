@@ -1,10 +1,11 @@
-<h2>Find_HTML_inj.py</h2>
-Script will import hosts from host.txt and find frostb1te">bugbounty within the source of the sites. Popularly used with paraspider
-
-<b>COMMAND: </b>
+<h2>PizzaScan!</h2>
+Team Pizzabyte proudly presents the new PizzaScan tool! This tool automates finding bugs (Specificly XSS) with minimal amount of requests.
+USAGE
+<b>For a single domain</b>
 ```
-paramspider -o ./host.txt -d WEBSITE.COM
-sed -i 's/FUZZ/frostb1te">bugbounty/g' host.txt
-python3 Find_HTML_inj.py
+./Pizzascan.sh website.com -single
 ```
-
+<b>For collecting subdomains AND checking sites</b>
+```
+./Pizzascan.sh website.com -list
+```
